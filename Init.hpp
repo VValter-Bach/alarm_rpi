@@ -1,0 +1,6 @@
+
+namespace Init{
+
+    void initGpio();
+
+}
