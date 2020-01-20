@@ -1,4 +1,4 @@
 
 namespace Digit{
-    void DISPLAY();
+    void Display();
 }
