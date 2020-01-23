@@ -6,11 +6,11 @@ void InitGpio();
 int main(){
     InitGpio();
 
-    thread first(Digit::DISPLAY);   // only controls 7-segment displays and status LEDs
-    wiringPiISR(Input_Loop, INT_EDGE_FALLING, &(gnl::Toggle_Music));
-    wiringPiISR(Input_Minus, INT_EDGE_FALLING, &(gnl::Decrease_Minute));
-    wiringPiISR(Input_Alarm, INT_EDGE_FALLING, &(gnl::Toggle_Alarm));
-    wiringPiISR(Input_Add, INT_EDGE_FALLING, &(gnl::Increase_Minute));
+    thread first(dgt::DISPLAY);   // only controls 7-segment displays and status LEDs
+    wiringPiISR(INPUT_MUSIC, INT_EDGE_FALLING, &(gnl::Toggle_Music));
+    wiringPiISR(INOUT_MINUS, INT_EDGE_FALLING, &(gnl::Decrease_Minute));
+    wiringPiISR(INPUT_ALARM, INT_EDGE_FALLING, &(gnl::Toggle_Alarm));
+    wiringPiISR(INPUT_PLUS, INT_EDGE_FALLING, &(gnl::Increase_Minute));
 
 }
 
@@ -23,23 +23,23 @@ void InitGpio(){
         exit (1);
 
 
-    pinMode(Item1, OUTPUT);
-    pinMode(Item2, OUTPUT);
-    pinMode(Item3, OUTPUT);
-    pinMode(Item4, OUTPUT);
-    pinMode(Item5, OUTPUT);
-    pinMode(Item6, OUTPUT);
-    pinMode(Item7, OUTPUT);
-    pinMode(Item8, OUTPUT);
+    pinMode(SEGMENT1, OUTPUT);
+    pinMode(SEGMENT2, OUTPUT);
+    pinMode(SEGMENT3, OUTPUT);
+    pinMode(SEGMENT4, OUTPUT);
+    pinMode(SEGMENT5, OUTPUT);
+    pinMode(SEGMENT6, OUTPUT);
+    pinMode(SEGMENT7, OUTPUT);
+    pinMode(SEGMENT8, OUTPUT);
 
-    pinMode(Digit1, OUTPUT);
-    pinMode(Digit2, OUTPUT);
-    pinMode(Digit3, OUTPUT);
-    pinMode(Digit4, OUTPUT);
-    pinMode(Digit5, OUTPUT);
-    pinMode(Digit6, OUTPUT);
-    pinMode(Digit7, OUTPUT);
-    pinMode(Digit8, OUTPUT);
+    pinMode(DIGIT1, OUTPUT);
+    pinMode(DIGIT2, OUTPUT);
+    pinMode(DIGIT3, OUTPUT);
+    pinMode(DIGIT4, OUTPUT);
+    pinMode(DIGIT5, OUTPUT);
+    pinMode(DIGIT6, OUTPUT);
+    pinMode(DIGIT7, OUTPUT);
+    pinMode(DIGIT8, OUTPUT);
 
     pinMode(Led_Red, OUTPUT);
     pinMode(Led_Yellow, OUTPUT);

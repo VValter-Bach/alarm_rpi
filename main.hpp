@@ -25,30 +25,30 @@ using namespace std::experimental::filesystem;
 
 #define PI 3.14f
 
-#define Item1 8
-#define Item2 9
-#define Item3 7
-#define Item4 15
-#define Item5 16
-#define Item6 1
-#define Item7 0
-#define Item8 2
+#define SEGMENT1 8
+#define SEGMENT2 9
+#define SEGMENT3 7
+#define SEGMENT4 15
+#define SEGMENT5 16
+#define SEGMENT6 1
+#define SEGMENT7 0
+#define SEGMENT8 2
 
 #define Sleep 2222
 
-#define Digit1 29
-#define Digit2 28
-#define Digit3 27
-#define Digit4 26
-#define Digit5 25
-#define Digit6 24
-#define Digit7 23
-#define Digit8 22
+#define DIGIT1 29
+#define DIGIT2 28
+#define DIGIT3 27
+#define DIGIT4 26
+#define DIGIT5 25
+#define DIGIT6 24
+#define DIGIT7 23
+#define DIGIT8 22
 
-#define Input_Loop 21
-#define Input_Minus 6
-#define Input_Alarm 11
-#define Input_Add 31
+#define INPUT_MUSIC 21
+#define INOUT_MINUS 6
+#define INPUT_ALARM 11
+#define INPUT_PLUS 31
 
 #define Led_Red 3
 #define Led_Yellow 4

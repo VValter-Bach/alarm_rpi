@@ -1,7 +1,7 @@
 #ifndef DIGIT_HPP
 #define DIGIT_HPP
 
-namespace Digit{
+namespace dgt{
     void Display();
 }
 

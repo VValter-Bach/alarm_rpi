@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-namespace Digit{
+namespace dgt{
 
     //Predefinitions of all the functions
     void Number_Zero(bool seperator_bol = false);
@@ -87,14 +87,14 @@ namespace Digit{
     //The pin of the digit-segment must be hight
     //Here it iterates throught the digit and set only the active one on low the rest is high
     void Select_Digit(int i){
-        digitalWrite(Digit1, i != 1);
-        digitalWrite(Digit2, i != 2);
-        digitalWrite(Digit3, i != 3);
-        digitalWrite(Digit4, i != 4);
-        digitalWrite(Digit5, i != 5);
-        digitalWrite(Digit6, i != 6);
-        digitalWrite(Digit7, i != 7);
-        digitalWrite(Digit8, i != 8);
+        digitalWrite(DIGIT1, i != 1);
+        digitalWrite(DIGIT2, i != 2);
+        digitalWrite(DIGIT3, i != 3);
+        digitalWrite(DIGIT4, i != 4);
+        digitalWrite(DIGIT5, i != 5);
+        digitalWrite(DIGIT6, i != 6);
+        digitalWrite(DIGIT7, i != 7);
+        digitalWrite(DIGIT8, i != 8);
     }
 
     //This takes a char and calls the related function
@@ -125,115 +125,115 @@ namespace Digit{
 
     //This is which segments pins must be high and low to display the number given in the function name
     void Number_Zero(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 0);
-        digitalWrite(Item5, 1);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol); // if the seperator bool is true the point after the number (segment 8) must be light up
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 0);
+        digitalWrite(SEGMENT5, 1);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol); // if the seperator bool is true the point after the number (segment 8) must be light up
     }
 
 
     //it is the functionallity is the same but the high and low values are fifferent
     void Number_One(bool seperator_bol){
-        digitalWrite(Item1, 0);
-        digitalWrite(Item2, 0);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 0);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 0);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 0);
+        digitalWrite(SEGMENT2, 0);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 0);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 0);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Two(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 0);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 1);
-        digitalWrite(Item6, 0);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 0);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 1);
+        digitalWrite(SEGMENT6, 0);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Three(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 0);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 0);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Four(bool seperator_bol){
-        digitalWrite(Item1, 0);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 0);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 0);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 0);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Five(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 0);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 0);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Six(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 0);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 1);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 0);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 1);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Seven(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 0);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 0);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 0);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 0);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 0);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 0);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Eight(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 1);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 1);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
     void Number_Nine(bool seperator_bol){
-        digitalWrite(Item1, 1);
-        digitalWrite(Item2, 1);
-        digitalWrite(Item3, 1);
-        digitalWrite(Item4, 1);
-        digitalWrite(Item5, 0);
-        digitalWrite(Item6, 1);
-        digitalWrite(Item7, 1);
-        digitalWrite(Item8, seperator_bol);
+        digitalWrite(SEGMENT1, 1);
+        digitalWrite(SEGMENT2, 1);
+        digitalWrite(SEGMENT3, 1);
+        digitalWrite(SEGMENT4, 1);
+        digitalWrite(SEGMENT5, 0);
+        digitalWrite(SEGMENT6, 1);
+        digitalWrite(SEGMENT7, 1);
+        digitalWrite(SEGMENT8, seperator_bol);
     }
 
 }
