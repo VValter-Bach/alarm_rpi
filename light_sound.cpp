@@ -1,9 +1,17 @@
+#include "light_sound.hpp"
+#include "main.hpp"
+
 namespace ls{ //ls = light and sound
-    //The interface for the music
+    //The global interface for the music
     bool music_bol = false;
-    bool music_play_bol = false;
     void Play_Music();
 
+    //the intern declariontins and varaibles
+    bool music_play_bol = false;
+    void RGB_Color_Pulse(char*, int, int, int, int, int);
+    void RGB_Move(char*, int, int);
+    void Light_Sound();
+    void Random(int);
 
     void Light_Sound(){
         while(1){

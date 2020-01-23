@@ -1,11 +1,11 @@
+#include "general.hpp"
 #include "main.hpp"
 
-namespace general{
+namespace gnl{
     //The interface for the alarm
-    int alarm_hour_int_int = 6; //The hour of the alarm
+    int alarm_hour_int = 6; //The hour of the alarm
     int alarm_min_int = 30; //The minute of the alarm
     bool alarm_bol = 1; //If alarm is enabled
-    void Alarm_Add_Minute(int); //In/de-crease the clock
     void Toggle_Music();
     void Toggle_Alarm();
     void Increase_Minute();
@@ -13,6 +13,7 @@ namespace general{
 
     //private declaration and implementation
     void Alarm_Add_Hour(int);
+    void Alarm_Add_Minute(int); //In/de-crease the clock
 
     void Toggle_Music(){
         ls::music_bol = !ls::music_bol;

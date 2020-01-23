@@ -27,16 +27,16 @@ namespace Digit{
             time(&rawtime); //Update the raw data
             timeinfo = localtime(&rawtime); //Update the converted data
             Time_Display(timeinfo->tm_min, timeinfo->tm_hour); //Call of Time_Display
-            if(timeinfo->tm_hour == Alarm::ALARM_HOUR && timeinfo->tm_min == Alarm::ALARM_MINUTES && Alarm::ALARM) Music::music = true; //TODO: rewrite the alarm check
+            if(gnl::alarm_bol && timeinfo->tm_hour == gnl::alarm_hour_int && timeinfo->tm_min == gnl::alarm_min_int) ls::music_bol = true;
             Status_Display(timeinfo->tm_wday); //Call of Status_Display
     	}
     }
 
     //It controlls the three status LEDS
     void Status_Display(int day){
-        digitalWrite(Led_Red, Alarm::ALARM);
+        digitalWrite(Led_Red, gnl::alarm_bol);
         digitalWrite(Led_Green, (day > 4));
-        digitalWrite(Led_Music, Music::music);
+        digitalWrite(Led_Music, ls::music_bol);
      }
 
     //This iterates through the single Digits
@@ -63,20 +63,20 @@ namespace Digit{
                     else Number_On_Digit(to_string(mins)[1]);
                     break;
                 case 5:
-                    if(Alarm::ALARM_HOUR < 10) Number_Zero();
-                    else Number_On_Digit(to_string(Alarm::ALARM_HOUR)[0]);
+                    if(gnl::alarm_hour_int < 10) Number_Zero();
+                    else Number_On_Digit(to_string(gnl::alarm_hour_int)[0]);
                     break;
                 case 6:
-                    if(Alarm::ALARM_HOUR < 10) Number_On_Digit(to_string(Alarm::ALARM_HOUR)[0], true);
-                    else Number_On_Digit(to_string(Alarm::ALARM_HOUR)[1], true);
+                    if(gnl::alarm_hour_int < 10) Number_On_Digit(to_string(gnl::alarm_hour_int)[0], true);
+                    else Number_On_Digit(to_string(gnl::alarm_hour_int)[1], true);
                     break;
                 case 7:
-                    if(Alarm::ALARM_MINUTES < 10) Number_Zero();
-                    else Number_On_Digit(to_string(Alarm::ALARM_MINUTES)[0]);
+                    if(gnl::alarm_min_int < 10) Number_Zero();
+                    else Number_On_Digit(to_string(gnl::alarm_min_int)[0]);
                     break;
                 case 8:
-                    if(Alarm::ALARM_MINUTES < 10) Number_On_Digit(to_string(Alarm::ALARM_MINUTES)[0]);
-                    else Number_On_Digit(to_string(Alarm::ALARM_MINUTES)[1]);
+                    if(gnl::alarm_min_int < 10) Number_On_Digit(to_string(gnl::alarm_min_int)[0]);
+                    else Number_On_Digit(to_string(gnl::alarm_min_int)[1]);
                     break;
            }
            usleep(Sleep); //The sleep command for the pins to change according to the selected Number

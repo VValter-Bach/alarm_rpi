@@ -7,6 +7,10 @@ int main(){
     InitGpio();
 
     thread first(Digit::DISPLAY);   // only controls 7-segment displays and status LEDs
+    wiringPiISR(Input_Loop, INT_EDGE_FALLING, &(gnl::Toggle_Music));
+    wiringPiISR(Input_Minus, INT_EDGE_FALLING, &(gnl::Decrease_Minute));
+    wiringPiISR(Input_Alarm, INT_EDGE_FALLING, &(gnl::Toggle_Alarm));
+    wiringPiISR(Input_Add, INT_EDGE_FALLING, &(gnl::Increase_Minute));
 
 }
 

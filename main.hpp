@@ -20,7 +20,8 @@ using namespace std;
 using namespace std::experimental::filesystem;
 
 #include "Digit.hpp"
-#include "IT.hpp"
+#include "light_sound.hpp"
+#include "general.hpp"
 
 #define PI 3.14f
 
