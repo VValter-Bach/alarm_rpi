@@ -3,16 +3,16 @@
 namespace Digit{
 
     //Predefinitions of all the functions
-    void Number_Zero(bool Mitte_bol = false);
-    void Number_One(bool Mitte_bol = false);
-    void Number_Two(bool Mitte_bol = false);
-    void Number_Three(bool Mitte_bol = false);
-    void Number_Four(bool Mitte_bol = false);
-    void Number_Five(bool Mitte_bol = false);
-    void Number_Six(bool Mitte_bol = false);
-    void Number_Seven(bool Mitte_bol = false);
-    void Number_Eight(bool Mitte_bol = false);
-    void Number_Nine(bool Mitte_bol = false);
+    void Number_Zero(bool seperator_bol = false);
+    void Number_One(bool seperator_bol = false);
+    void Number_Two(bool seperator_bol = false);
+    void Number_Three(bool seperator_bol = false);
+    void Number_Four(bool seperator_bol = false);
+    void Number_Five(bool seperator_bol = false);
+    void Number_Six(bool seperator_bol = false);
+    void Number_Seven(bool seperator_bol = false);
+    void Number_Eight(bool seperator_bol = false);
+    void Number_Nine(bool seperator_bol = false);
     void Display();
     void Number_On_Digit(char, bool = false);
     void Select_Digit(int);
@@ -50,7 +50,8 @@ namespace Digit{
                     else Number_On_Digit(to_string(hour)[0]); //Else the first number 13:XX (at index 0 of the string) gets displayed
                     break;
                 case 2: //The second Digit
-                    if(hour < 10) Number_On_Digit(to_string(hour)[0]); //If the number is smaller then 10 we need to take the first position of the string
+                    //The true is set because of the seperator we want for example 16:30 on the display not 1630
+                    if(hour < 10) Number_On_Digit(to_string(hour)[0], true); //If the number is smaller then 10 we need to take the first position of the string
                     else Number_On_Digit(to_string(hour)[1], true); //Else the second number at the String (at index 1)
                     break;
                 case 3://Same as above
@@ -66,7 +67,7 @@ namespace Digit{
                     else Number_On_Digit(to_string(Alarm::ALARM_HOUR)[0]);
                     break;
                 case 6:
-                    if(Alarm::ALARM_HOUR < 10) Number_On_Digit(to_string(Alarm::ALARM_HOUR)[0]);
+                    if(Alarm::ALARM_HOUR < 10) Number_On_Digit(to_string(Alarm::ALARM_HOUR)[0], true);
                     else Number_On_Digit(to_string(Alarm::ALARM_HOUR)[1], true);
                     break;
                 case 7:
@@ -83,18 +84,20 @@ namespace Digit{
     }
 
     //The Idea behind this is if the out put is set to 0 it is usable as a Ground.
-    //The pin of the digit must be low
+    //The pin of the digit-segment must be hight
+    //Here it iterates throught the digit and set only the active one on low the rest is high
     void Select_Digit(int i){
-        digitalWrite(Digit1, !(i == 1));
-        digitalWrite(Digit2, !(i == 2));
-        digitalWrite(Digit3, !(i == 3));
-        digitalWrite(Digit4, !(i == 4));
-        digitalWrite(Digit5, !(i == 5));
-        digitalWrite(Digit6, !(i == 6));
-        digitalWrite(Digit7, !(i == 7));
-        digitalWrite(Digit8, !(i == 8));
+        digitalWrite(Digit1, i != 1);
+        digitalWrite(Digit2, i != 2);
+        digitalWrite(Digit3, i != 3);
+        digitalWrite(Digit4, i != 4);
+        digitalWrite(Digit5, i != 5);
+        digitalWrite(Digit6, i != 6);
+        digitalWrite(Digit7, i != 7);
+        digitalWrite(Digit8, i != 8);
     }
 
+    //This takes a char and calls the related function
     void Number_On_Digit(char c, bool point){
     	switch(c){
             case '0' : Number_Zero(point);
@@ -120,7 +123,8 @@ namespace Digit{
     	}
     }
 
-    void Number_Zero(bool Mitte_bol){
+    //This is which segments pins must be high and low to display the number given in the function name
+    void Number_Zero(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 1);
@@ -128,12 +132,12 @@ namespace Digit{
         digitalWrite(Item5, 1);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol); // if the seperator bool is true the point after the number (segment 8) must be light up
     }
 
-    void Number_One(bool Mitte_bol){
+
+    //it is the functionallity is the same but the high and low values are fifferent
+    void Number_One(bool seperator_bol){
         digitalWrite(Item1, 0);
         digitalWrite(Item2, 0);
         digitalWrite(Item3, 1);
@@ -141,12 +145,10 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 0);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Two(bool Mitte_bol){
+    void Number_Two(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 0);
         digitalWrite(Item3, 1);
@@ -154,12 +156,10 @@ namespace Digit{
         digitalWrite(Item5, 1);
         digitalWrite(Item6, 0);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Three(bool Mitte_bol){
+    void Number_Three(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 0);
         digitalWrite(Item3, 1);
@@ -167,12 +167,10 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Four(bool Mitte_bol){
+    void Number_Four(bool seperator_bol){
         digitalWrite(Item1, 0);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 1);
@@ -180,12 +178,10 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 0);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Five(bool Mitte_bol){
+    void Number_Five(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 0);
@@ -193,12 +189,10 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Six(bool Mitte_bol){
+    void Number_Six(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 0);
@@ -206,12 +200,10 @@ namespace Digit{
         digitalWrite(Item5, 1);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Seven(bool Mitte_bol){
+    void Number_Seven(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 0);
         digitalWrite(Item3, 1);
@@ -219,12 +211,10 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 0);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Eight(bool Mitte_bol){
+    void Number_Eight(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 1);
@@ -232,12 +222,10 @@ namespace Digit{
         digitalWrite(Item5, 1);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
-    void Number_Nine(bool Mitte_bol){
+    void Number_Nine(bool seperator_bol){
         digitalWrite(Item1, 1);
         digitalWrite(Item2, 1);
         digitalWrite(Item3, 1);
@@ -245,9 +233,7 @@ namespace Digit{
         digitalWrite(Item5, 0);
         digitalWrite(Item6, 1);
         digitalWrite(Item7, 1);
-
-        if(Mitte_bol) digitalWrite(Item8, 1);
-        else digitalWrite(Item8, 0);
+        digitalWrite(Item8, seperator_bol);
     }
 
 }

@@ -19,12 +19,8 @@
 using namespace std;
 using namespace std::experimental::filesystem;
 
-#include "Init.hpp"
 #include "Digit.hpp"
-#include "Alarm.hpp"
-#include "Music.hpp"
 #include "IT.hpp"
-#include "Led.hpp"
 
 #define PI 3.14f
 
