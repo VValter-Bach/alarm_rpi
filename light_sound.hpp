@@ -3,7 +3,7 @@
 
 namespace ls {
     extern bool music_bol;
-    void Play_Music();
+    void Light_Sound();
 }
 
 #endif //LIGHT_SOUND_HPP

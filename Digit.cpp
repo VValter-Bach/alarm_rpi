@@ -1,18 +1,9 @@
 #include "main.hpp"
 
 namespace dgt{
-
-    //Predefinitions of all the functions
-    void Number_Zero(bool seperator_bol = false);
-    void Number_One(bool seperator_bol = false);
-    void Number_Two(bool seperator_bol = false);
-    void Number_Three(bool seperator_bol = false);
-    void Number_Four(bool seperator_bol = false);
-    void Number_Five(bool seperator_bol = false);
-    void Number_Six(bool seperator_bol = false);
-    void Number_Seven(bool seperator_bol = false);
-    void Number_Eight(bool seperator_bol = false);
-    void Number_Nine(bool seperator_bol = false);
+    //numbers in arrays -0-         -1-             -2-         -3-             -4-             -5-             -6-             -7-          -8-            -9-
+    bool[70] pinvalues = {1,1,1,0,1,1,1, 0,0,1,0,0,1,0, 1,0,1,1,1,0,1, 1,0,1,1,0,1,1, 0,1,1,1,0,1,0, 1,1,0,1,0,1,1, 1,1,0,1,1,1,1, 1,0,1,0,0,1,0, 1,1,1,1,1,1,1, 1,1,1,1,0,1,1};
+    int[8] pins = {SEGMENT1, SEGMENT2, SEGMENT3, SEGMENT4, SEGMENT5, SEGMENT6, SEGMENT7, SEGMENT8};
     void Display();
     void Number_On_Digit(char, bool = false);
     void Select_Digit(int);
@@ -46,37 +37,37 @@ namespace dgt{
             Select_Digit(i);
             switch (i){
                 case 1: //The first Digit
-                    if(hour < 10) Number_Zero(); //If the number is smaller then 10 the we want there a 06:XX on the clock, so the first digit is replaced with a zero
-                    else Number_On_Digit(to_string(hour)[0]); //Else the first number 13:XX (at index 0 of the string) gets displayed
+                    if(hour < 10) Number_On_Digit(0); //If the number is smaller then 10 the we want there a 06:XX on the clock, so the first digit is replaced with a zero
+                    else Number_On_Digit(hour / 10); //Else the first number 13:XX (at index 0 of the string) gets displayed
                     break;
                 case 2: //The second Digit
                     //The true is set because of the seperator we want for example 16:30 on the display not 1630
-                    if(hour < 10) Number_On_Digit(to_string(hour)[0], true); //If the number is smaller then 10 we need to take the first position of the string
-                    else Number_On_Digit(to_string(hour)[1], true); //Else the second number at the String (at index 1)
+                    if(hour < 10) Number_On_Digit(hour, true); //If the number is smaller then 10 we need to take the first position of the string
+                    else Number_On_Digit(hour % 10, true); //Else the second number at the String (at index 1)
                     break;
                 case 3://Same as above
-                    if(mins < 10) Number_Zero();
-                    else Number_On_Digit(to_string(mins)[0]);
+                    if(mins < 10) Number_On_Digit(0);
+                    else Number_On_Digit(mins / 10);
                     break;
                 case 4:
-                    if(mins < 10) Number_On_Digit(to_string(mins)[0]);
-                    else Number_On_Digit(to_string(mins)[1]);
+                    if(mins < 10) Number_On_Digit(mins);
+                    else Number_On_Digit(mins % 10);
                     break;
                 case 5:
-                    if(gnl::alarm_hour_int < 10) Number_Zero();
-                    else Number_On_Digit(to_string(gnl::alarm_hour_int)[0]);
+                    if(gnl::alarm_hour_int < 10) Number_On_Digit();
+                    else Number_On_Digit(gnl::alarm_hour_int / 10);
                     break;
                 case 6:
-                    if(gnl::alarm_hour_int < 10) Number_On_Digit(to_string(gnl::alarm_hour_int)[0], true);
-                    else Number_On_Digit(to_string(gnl::alarm_hour_int)[1], true);
+                    if(gnl::alarm_hour_int < 10) Number_On_Digit(gnl::alarm_hour_int, true);
+                    else Number_On_Digit(gnl::alarm_hour_int % 10, true);
                     break;
                 case 7:
-                    if(gnl::alarm_min_int < 10) Number_Zero();
-                    else Number_On_Digit(to_string(gnl::alarm_min_int)[0]);
+                    if(gnl::alarm_min_int < 10) Number_On_Digit();
+                    else Number_On_Digit(gnl::alarm_min_int / 10);
                     break;
                 case 8:
-                    if(gnl::alarm_min_int < 10) Number_On_Digit(to_string(gnl::alarm_min_int)[0]);
-                    else Number_On_Digit(to_string(gnl::alarm_min_int)[1]);
+                    if(gnl::alarm_min_int < 10) Number_On_Digit(gnl::alarm_min_int);
+                    else Number_On_Digit(gnl::alarm_min_int % 10);
                     break;
            }
            usleep(Sleep); //The sleep command for the pins to change according to the selected Number
@@ -97,143 +88,11 @@ namespace dgt{
         digitalWrite(DIGIT8, i != 8);
     }
 
-    //This takes a char and calls the related function
-    void Number_On_Digit(char c, bool point){
-    	switch(c){
-            case '0' : Number_Zero(point);
-            	break;
-            case '1' : Number_One(point);
-            	break;
-            case '2' : Number_Two(point);
-            	break;
-            case '3' : Number_Three(point);
-            	break;
-            case '4' : Number_Four(point);
-            	break;
-            case '5' : Number_Five(point);
-            	break;
-            case '6' : Number_Six(point);
-            	break;
-            case '7' : Number_Seven(point);
-            	break;
-            case '8' : Number_Eight(point);
-            	break;
-            case '9' : Number_Nine(point);
-            	break;
-    	}
+    //This takes a int and wirte the segments according to the array
+    void Number_On_Digit(int number, bool point){
+        for(int i = 0; i < 7; i++){
+            digitalWrite(pins[i],pinvalues[number*7+i]);
+        }
+        digitalWrite(pins[7], point);
     }
-
-    //This is which segments pins must be high and low to display the number given in the function name
-    void Number_Zero(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 0);
-        digitalWrite(SEGMENT5, 1);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol); // if the seperator bool is true the point after the number (segment 8) must be light up
-    }
-
-
-    //it is the functionallity is the same but the high and low values are fifferent
-    void Number_One(bool seperator_bol){
-        digitalWrite(SEGMENT1, 0);
-        digitalWrite(SEGMENT2, 0);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 0);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 0);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Two(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 0);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 1);
-        digitalWrite(SEGMENT6, 0);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Three(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 0);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Four(bool seperator_bol){
-        digitalWrite(SEGMENT1, 0);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 0);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Five(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 0);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Six(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 0);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 1);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Seven(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 0);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 0);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 0);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Eight(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 1);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
-    void Number_Nine(bool seperator_bol){
-        digitalWrite(SEGMENT1, 1);
-        digitalWrite(SEGMENT2, 1);
-        digitalWrite(SEGMENT3, 1);
-        digitalWrite(SEGMENT4, 1);
-        digitalWrite(SEGMENT5, 0);
-        digitalWrite(SEGMENT6, 1);
-        digitalWrite(SEGMENT7, 1);
-        digitalWrite(SEGMENT8, seperator_bol);
-    }
-
 }

@@ -4,13 +4,13 @@
 namespace ls{ //ls = light and sound
     //The global interface for the music
     bool music_bol = false;
-    void Play_Music();
+    void Light_Sound();
 
     //the intern declariontins and varaibles
     bool music_play_bol = false;
     void RGB_Color_Pulse(char*, int, int, int, int, int);
+    void Play_Music();
     void RGB_Move(char*, int, int);
-    void Light_Sound();
     void Random(int);
 
     void Light_Sound(){
@@ -63,7 +63,7 @@ namespace ls{ //ls = light and sound
             usleep(30000);//sleeps for 300000 mikroseconds
         }
         for(int i = 0; i < len; i++) dat[i] = 0; //if music isnt playing anymore write the data all 0 to makes the leds out
-        wiringPiSPIDataRW(0, dat, len); 
+        wiringPiSPIDataRW(0, dat, len);
     }
 
     //this plays a song
