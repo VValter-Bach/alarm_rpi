@@ -19,7 +19,7 @@
 using namespace std;
 using namespace std::experimental::filesystem;
 
-#include "Digit.hpp"
+#include "digit.hpp"
 #include "light_sound.hpp"
 #include "general.hpp"
 

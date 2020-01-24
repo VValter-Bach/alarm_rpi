@@ -6,8 +6,8 @@ void InitGpio();
 int main(){
     InitGpio();
 
-    thread first(dgt::DISPLAY);   // only controls 7-segment displays and status LEDs
-    thread first(dgt::DISPLAY);   // only controls 7-segment displays and status LEDs
+    thread first(dgt::Display);   // only controls 7-segment displays and status LEDs
+    thread second(ls::Light_Sound);   // only controls 7-segment displays and status LEDs
     wiringPiISR(INPUT_MUSIC, INT_EDGE_FALLING, &(gnl::Toggle_Music));
     wiringPiISR(INOUT_MINUS, INT_EDGE_FALLING, &(gnl::Decrease_Minute));
     wiringPiISR(INPUT_ALARM, INT_EDGE_FALLING, &(gnl::Toggle_Alarm));

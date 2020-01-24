@@ -11,14 +11,16 @@ namespace ls{ //ls = light and sound
     void RGB_Color_Pulse(char*, int, int, int, int, int);
     void Play_Music();
     void RGB_Move(char*, int, int);
-    void Random(int);
+    int Random(unsigned int);
+    void Led_Show(bool, int, int, int);
+
 
     void Light_Sound(){
         while(1){
             std::thread * led_ted;
             if(music_bol){ //If music_bol is true set music is playing true adn play music
                 music_play_bol = true;
-                led_ted = new std::thred(Led_Show, Random(2), Random(255), Random(255), Random(255));
+                led_ted = new std::thread(Led_Show, (bool)Random(2), Random(255), Random(255), Random(255));
                 while(music_bol) Play_Music();
             }
             else{ //Else reset music_play_bol
@@ -70,7 +72,7 @@ namespace ls{ //ls = light and sound
     void Play_Music(){
         std::vector<string> songs = {};
         std::string path = "/home/pi/Music/";
-        for (const auto & entry : directory_iterator(path)) songs.push_back(entry.path());
+        for (const auto & entry : std::experimental::filesystem::directory_iterator(path)) songs.push_back(entry.path());
         system(("omxplayer --no-osd \"" + songs[Random(songs.size())] + "\"").c_str());
     }
 }

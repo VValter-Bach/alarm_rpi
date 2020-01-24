@@ -2,10 +2,10 @@
 
 namespace dgt{
     //numbers in arrays -0-         -1-             -2-         -3-             -4-             -5-             -6-             -7-          -8-            -9-
-    bool[70] pinvalues = {1,1,1,0,1,1,1, 0,0,1,0,0,1,0, 1,0,1,1,1,0,1, 1,0,1,1,0,1,1, 0,1,1,1,0,1,0, 1,1,0,1,0,1,1, 1,1,0,1,1,1,1, 1,0,1,0,0,1,0, 1,1,1,1,1,1,1, 1,1,1,1,0,1,1};
-    int[8] pins = {SEGMENT1, SEGMENT2, SEGMENT3, SEGMENT4, SEGMENT5, SEGMENT6, SEGMENT7, SEGMENT8};
+    bool pinvalues[70] = {1,1,1,0,1,1,1, 0,0,1,0,0,1,0, 1,0,1,1,1,0,1, 1,0,1,1,0,1,1, 0,1,1,1,0,1,0, 1,1,0,1,0,1,1, 1,1,0,1,1,1,1, 1,0,1,0,0,1,0, 1,1,1,1,1,1,1, 1,1,1,1,0,1,1};
+    int pins[8] = {SEGMENT1, SEGMENT2, SEGMENT3, SEGMENT4, SEGMENT5, SEGMENT6, SEGMENT7, SEGMENT8};
     void Display();
-    void Number_On_Digit(char, bool = false);
+    void Number_On_Digit(int, bool = false);
     void Select_Digit(int);
     void Time_Display(int, int);
     void Status_Display(int);
@@ -54,7 +54,7 @@ namespace dgt{
                     else Number_On_Digit(mins % 10);
                     break;
                 case 5:
-                    if(gnl::alarm_hour_int < 10) Number_On_Digit();
+                    if(gnl::alarm_hour_int < 10) Number_On_Digit(0);
                     else Number_On_Digit(gnl::alarm_hour_int / 10);
                     break;
                 case 6:
@@ -62,7 +62,7 @@ namespace dgt{
                     else Number_On_Digit(gnl::alarm_hour_int % 10, true);
                     break;
                 case 7:
-                    if(gnl::alarm_min_int < 10) Number_On_Digit();
+                    if(gnl::alarm_min_int < 10) Number_On_Digit(0);
                     else Number_On_Digit(gnl::alarm_min_int / 10);
                     break;
                 case 8:

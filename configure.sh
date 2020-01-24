@@ -26,11 +26,11 @@ fi
 
 makefile () {
 
-    out="alarm"
+    out="alarm.out"
     src=($(ls *.cpp))
     obj=()
-    cc=g++
-    flags="-O3 -pthread"
+    cc=c++
+    flags="-Wall -lwiringPi -pthread -lstdc++fs"
     for item in ${src[*]}
     do
         obj+=($(echo "obj/$item" | tr -s 'cpp' 'o'))
@@ -40,12 +40,12 @@ makefile () {
     echo "OBJ=${obj[*]}" >> makefile
 
     echo "${out}: \$(OBJ)" >> makefile
-    echo -e "\t\$(CC) \$(FLAGS) -o ${out} \$(OBJ)\n" >> makefile
+    echo -e "\t\$(CC) -o ${out} \$(OBJ) \$(FLAGS)\n" >> makefile
 
     for((i=0; i<4; i++))
     do
         echo "${obj[$i]}: ${src[$i]}" >> makefile
-        echo -e "\t\$(CC) \$(FLAGS) -c ${src[$i]} -o ${obj[$i]}" >> makefile
+        echo -e "\t\$(CC) -c ${src[$i]} -o ${obj[$i]} \$(FLAGS)" >> makefile
     done
 }
 
