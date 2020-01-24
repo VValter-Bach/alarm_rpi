@@ -13,14 +13,18 @@ namespace ls{ //ls = light and sound
     void RGB_Move(char*, int, int);
     int Random(unsigned int);
     void Led_Show(bool, int, int, int);
-
+    void RGB_Generate();
+    int r_int;
+    int b_int;
+    int g_int;
 
     void Light_Sound(){
         while(1){
             std::thread * led_ted = nullptr;
             if(music_bol){ //If music_bol is true set music is playing true adn play music
                 music_play_bol = true;
-                led_ted = new std::thread(Led_Show, Random(100) > 50 ? false:true, Random(255), Random(255), Random(255));
+		RGB_Generate();
+                led_ted = new std::thread(Led_Show, Random(100) > 50 ? false:true, r_int, g_int, b_int);
                 while(music_bol) Play_Music();
             }
             else{ //Else reset music_play_bol
@@ -41,9 +45,28 @@ namespace ls{ //ls = light and sound
     //The u is the time varaible which let it pulsate
     void RGB_Color_Pulse(unsigned char * dat, int R, int G, int B, int u, int len){
         for(int i = 0; i < len; i++){
-            if((i%3) == 0) dat[i] = R * std::abs(std::sin((u/33.0f) * PI));
-            if((i%3) == 1) dat[i] = G * std::abs(std::sin((u/33.0f) * PI));
-            if((i%3) == 2) dat[i] = B * std::abs(std::sin((u/33.0f) * PI));
+            if((i%3) == 0) dat[i] = R * std::abs(std::sin((u/53.0f) * PI));
+            if((i%3) == 1) dat[i] = G * std::abs(std::sin((u/53.0f) * PI));
+            if((i%3) == 2) dat[i] = B * std::abs(std::sin((u/53.0f) * PI));
+        }
+    }
+
+    void RGB_Generate(){
+	int rand = Random(1000);
+	if(rand < 333){
+	    r_int = Random(256);
+	    g_int = Random(255 - r_int);
+	    b_int = (255 - r_int) - g_int;
+	}
+        else if(rand > 666){
+            b_int = Random(256);
+            r_int = Random(255 - b_int);
+            g_int = (255 - b_int) - r_int;
+        }
+	else{
+            g_int = Random(256);
+            b_int = Random(255 - g_int);
+            r_int = (255 - g_int) - b_int;
         }
     }
 
