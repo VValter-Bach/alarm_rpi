@@ -17,15 +17,16 @@ namespace ls{ //ls = light and sound
 
     void Light_Sound(){
         while(1){
-            std::thread * led_ted;
+            std::thread * led_ted = nullptr;
             if(music_bol){ //If music_bol is true set music is playing true adn play music
                 music_play_bol = true;
-                led_ted = new std::thread(Led_Show, (bool)Random(2), Random(255), Random(255), Random(255));
+                led_ted = new std::thread(Led_Show, Random(100) > 50 ? false:true, Random(255), Random(255), Random(255));
                 while(music_bol) Play_Music();
             }
             else{ //Else reset music_play_bol
                 music_play_bol = false;
-                led_ted->join();
+                if(led_ted != nullptr)led_ted->join();
+		led_ted = nullptr;
             }
             sleep(2);
         }
@@ -40,9 +41,9 @@ namespace ls{ //ls = light and sound
     //The u is the time varaible which let it pulsate
     void RGB_Color_Pulse(unsigned char * dat, int R, int G, int B, int u, int len){
         for(int i = 0; i < len; i++){
-            if((i%3) == 0) dat[i] = R * std::sin((u/33.0f) * PI);
-            if((i%3) == 1) dat[i] = G * std::sin((u/33.0f) * PI);
-            if((i%3) == 2) dat[i] = B * std::sin((u/33.0f) * PI);
+            if((i%3) == 0) dat[i] = R * std::abs(std::sin((u/33.0f) * PI));
+            if((i%3) == 1) dat[i] = G * std::abs(std::sin((u/33.0f) * PI));
+            if((i%3) == 2) dat[i] = B * std::abs(std::sin((u/33.0f) * PI));
         }
     }
 

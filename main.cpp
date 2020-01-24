@@ -12,7 +12,7 @@ int main(){
     wiringPiISR(INOUT_MINUS, INT_EDGE_FALLING, &(gnl::Decrease_Minute));
     wiringPiISR(INPUT_ALARM, INT_EDGE_FALLING, &(gnl::Toggle_Alarm));
     wiringPiISR(INPUT_PLUS, INT_EDGE_FALLING, &(gnl::Increase_Minute));
-
+    first.join();
 }
 
 
