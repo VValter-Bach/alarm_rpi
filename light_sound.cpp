@@ -24,7 +24,7 @@ namespace ls{ //ls = light and sound
             if(music_bol){ //If music_bol is true set music is playing true adn play music
                 music_play_bol = true;
 		RGB_Generate();
-                led_ted = new std::thread(Led_Show, Random(100) > 50 ? false:true, r_int, g_int, b_int);
+                led_ted = new std::thread(Led_Show, Random(100) > 50 ? false:false, r_int, g_int, b_int);
                 while(music_bol) Play_Music();
             }
             else{ //Else reset music_play_bol
