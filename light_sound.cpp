@@ -95,8 +95,8 @@ namespace ls{ //ls = light and sound
     //this plays a song
     void Play_Music(){
         std::vector<string> songs = {};
-        std::string path = "/home/pi/Music/";
+        std::string path = "/home/pi/Musik/";
         for (const auto & entry : std::experimental::filesystem::directory_iterator(path)) songs.push_back(entry.path());
-        system(("omxplayer --no-osd \"" + songs[Random(songs.size())] + "\"").c_str());
+        system(("mpv --af=volume=replaygain-track --volume=100 \"" + songs[Random(songs.size())] + "\"").c_str());
     }
 }
